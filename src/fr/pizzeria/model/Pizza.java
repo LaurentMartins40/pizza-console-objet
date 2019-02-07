@@ -27,5 +27,10 @@ public final class  Pizza {
 	public String pizzaInfo(){
 		return (this.code + "->" + this.libelle +"("+ this.prix+"€)");
 	}
-	
+	public void setPizza(int id, String code , String libelle, double prix){
+		this.id = id ;
+		this.code = code;
+		this.libelle = libelle;
+		this.prix = prix;
+	}
 }

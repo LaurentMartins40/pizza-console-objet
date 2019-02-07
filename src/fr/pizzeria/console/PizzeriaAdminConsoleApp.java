@@ -4,11 +4,8 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaMemDao;
-import fr.pizzeria.service.AjouterPizzaService;
-import fr.pizzeria.service.ListerPizzaService;
 import fr.pizzeria.service.MenuService;
-import fr.pizzeria.service.ModifierPizzaService;
-import fr.pizzeria.service.SupprimerPizzaService;
+import fr.pizzeria.service.MenuServiceFactory;
 
 public class PizzeriaAdminConsoleApp {
 	public static void main(String args[]) {
@@ -26,28 +23,19 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("99 : Sortir");
 			// lecture du choix de l'utilisateur
 			int choix = questionUser.nextInt();
-			switch (choix){
-			case 1 :  // l'utilisateur choisis d'afficher le menu
-				MenuService serviceLister = new ListerPizzaService();
-				serviceLister.executeUC(pizzaDao, questionUser);
-				break;
-			case 2 :	// l'utilisateur choisis d'ajouter une nouvelle pizza
-				MenuService serviceAjouter = new AjouterPizzaService();
-				serviceAjouter.executeUC(pizzaDao, questionUser);
-				break;
-			case 3 :
-				MenuService serviceModifier = new ModifierPizzaService();
-				serviceModifier.executeUC(pizzaDao, questionUser);
-				break;
-			case 4 :
-				MenuService serviceSupprimer = new SupprimerPizzaService();
-				serviceSupprimer.executeUC(pizzaDao, questionUser);
-				break;
-			case 99 :
-				System.out.println("Aurevoir ☹");
-				quit = true;
-				break;
+			if (choix != 99){
+			
+				// exécution de menuService dans MenuServiceFactory
+				MenuService menuService = MenuServiceFactory.getService(choix);
+				
+				menuService.executeUC(pizzaDao, questionUser);
 			}
+			else{
+				//Fin du programme
+				System.out.println("Aurevoir ☹");
+					quit = true;
+			}
+			
 		}
 		
 		questionUser.close();
