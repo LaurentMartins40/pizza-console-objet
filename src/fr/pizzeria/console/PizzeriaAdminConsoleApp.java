@@ -6,34 +6,46 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
 	public static void main(String args[]) {
+		// tableau contenant tous les codes
 		String[] tableauPizzaCode = {"PEP","MAR", "REIN","FRO","CAN","SAV","ORI","IND"};
+		// tableau contenant tous les libelées
 		String[] tableauPizzaLabel = {"Peperoni","Margherita", "La Reine","La 4 Fromage","La Cannibale","La Savoyarde","L'orientale","L'indienne"};
+		// tableau contenant tous les prix
 		Double[] tableauPizzaPrix = {12.50,14.00,11.50,12.00,12.50,13.00,13.50,14.00};
 		
+		// initialisation d'un tableau de "Pizza"
 		Pizza[] menu = new Pizza[8];
-		boolean quit = false;
-		Scanner questionUser = new Scanner(System.in ) ;
+		boolean quit = false;// initialisation de la variable "quit" a 0
+		Scanner questionUser = new Scanner(System.in ) ; // activation de la lecture
+		
+		// initialisation d'un tableau du "menu" avec toutes les "Pizza"
 		for(int i = 0 ; i < menu.length ; i++){
 			menu[i] = new Pizza(i+1,tableauPizzaCode[i],tableauPizzaLabel[i],tableauPizzaPrix[i]);
 		}
 		
-		while(!quit){
+		while(!quit){ // la boucle se répetera jusqu'a ce que la variable "quit" change d'etat
+			
+			// affichage du menu
 			System.out.println("1 : Lister les pizzas");
 			System.out.println("2 : Ajouter une nouvelle pizza");
 			System.out.println("3 : Mettre à jour une pizza");
 			System.out.println("4 : Supprimer une pizza");
 			System.out.println("99 : Sortir");
 			
+			// lecture du choix de l'utilisateur
 			int choix = questionUser.nextInt();
 			switch (choix){
-			case 1 :
+			case 1 :  // l'utilisateur choisis d'afficher le menu
 				System.out.println("Liste des pizzas");
+					// affichage du menu avec une boucle
 				for(int i=0;i<menu.length;i++){
 					System.out.println(menu[i].code + "->" + menu[i].libelle +"(" + menu[i].prix +")");
 				}
 				break;
-			case 2 :
+			case 2 :	// l'utilisateur choisis d'ajouter une nouvelle pizza
 				System.out.println("Ajout d’une nouvelle pizza");
+				
+				// récupération des prametres de la nouvelle pizza
 				System.out.println("saissisez le code");
 				String codeNouveau = questionUser.next();
 				System.out.println("saissisez le nom(sans espace)");
