@@ -15,9 +15,7 @@ public class SupprimerPizzaService extends MenuService{
 		Pizza[] pizzas = pizzaDao.findAllPizzas();
 		
 		for(int i=0;i < pizzas.length;i++){
-			System.out.print(pizzas[i].code + "->");
-			System.out.print(pizzas[i].libelle + "(");
-			System.out.println( pizzas[i].prix + ")");
+			System.out.print(pizzas[i].pizzaInfo());
 		}
 		System.out.println("choisissez la pizza a supprimer");
 		
