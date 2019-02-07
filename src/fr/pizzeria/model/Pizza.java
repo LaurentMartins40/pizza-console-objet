@@ -1,6 +1,6 @@
 package fr.pizzeria.model;
 
-public class Pizza {
+public final class  Pizza {
 	public int id;
 	public String code ;
 	public String libelle;

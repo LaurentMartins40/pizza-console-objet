@@ -2,26 +2,14 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.PizzaMemDao;
 import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
+	private static PizzaMemDao pizzaMemDao = new PizzaMemDao();
 	public static void main(String args[]) {
-		// tableau contenant tous les codes
-		String[] tableauPizzaCode = {"PEP","MAR", "REIN","FRO","CAN","SAV","ORI","IND"};
-		// tableau contenant tous les libelées
-		String[] tableauPizzaLabel = {"Peperoni","Margherita", "La Reine","La 4 Fromage","La Cannibale","La Savoyarde","L'orientale","L'indienne"};
-		// tableau contenant tous les prix
-		Double[] tableauPizzaPrix = {12.50,14.00,11.50,12.00,12.50,13.00,13.50,14.00};
-		
-		// initialisation d'un tableau de "Pizza"
-		Pizza[] menu = new Pizza[8];
 		boolean quit = false;// initialisation de la variable "quit" a 0
 		Scanner questionUser = new Scanner(System.in ) ; // activation de la lecture
-		
-		// initialisation d'un tableau du "menu" avec toutes les "Pizza"
-		for(int i = 0 ; i < menu.length ; i++){
-			menu[i] = new Pizza(i+1,tableauPizzaCode[i],tableauPizzaLabel[i],tableauPizzaPrix[i]);
-		}
 		
 		while(!quit){ // la boucle se répetera jusqu'a ce que la variable "quit" change d'etat
 			
@@ -31,16 +19,22 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("3 : Mettre à jour une pizza");
 			System.out.println("4 : Supprimer une pizza");
 			System.out.println("99 : Sortir");
-			
+			Pizza[] pizzasTemp = pizzaMemDao.findAllPizzas() ;
 			// lecture du choix de l'utilisateur
 			int choix = questionUser.nextInt();
 			switch (choix){
 			case 1 :  // l'utilisateur choisis d'afficher le menu
 				System.out.println("Liste des pizzas");
-					// affichage du menu avec une boucle
-				for(int i=0;i<menu.length;i++){
-					System.out.println(menu[i].code + "->" + menu[i].libelle +"(" + menu[i].prix +")");
+				
+				
+				for(int i = 0 ; i < pizzasTemp.length ; i++){
+					System.out.print(pizzasTemp[i].code + "->");
+					System.out.print(pizzasTemp[i].libelle + "(");
+					System.out.println(pizzasTemp[i].prix+ ")");
+					
 				}
+				
+				
 				break;
 			case 2 :	// l'utilisateur choisis d'ajouter une nouvelle pizza
 				System.out.println("Ajout d’une nouvelle pizza");
@@ -53,25 +47,16 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("saissisez le prix");
 				Double prixNouveau = Double.parseDouble(questionUser.next());
 				
-				Pizza[] tempMenu = new Pizza[menu.length+1]; 
-				 for(int i=0;i<menu.length;i++){
-					 tempMenu[i] = menu[i];
-				 }
-				 tempMenu[menu.length] = new Pizza(menu.length,codeNouveau,labelNouveau,prixNouveau);
-				 menu = tempMenu;
-				
+				Pizza nouvellePizza = new Pizza(codeNouveau,labelNouveau,prixNouveau);
+				pizzaMemDao.saveNewPizza(nouvellePizza);				
 				
 				break;
 			case 3 :
 				System.out.println("Mise à jour d’une pizza");
 				System.out.println("quelle pizza modifier");
 				String codeModif = questionUser.next();
-				int modifId = -1;
-				for(int i=0;i<menu.length;i++){
-					if(menu[i].code.equals(codeModif) ){
-						modifId = i;
-					}
-				}
+				
+				
 				System.out.println("saissisez le nouveau code");
 				String modifCode = questionUser.next();
 				System.out.println("saissisez le nouveau nom(sans espace)");
@@ -79,45 +64,24 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("saissisez le nouveau prix");
 				Double modifPrix = Double.parseDouble(questionUser.next());
 				
-				menu[modifId].code = modifCode;
-				menu[modifId].libelle = modifLabel;
-				menu[modifId].prix = modifPrix;
-				 
-				 if (modifId == -1){
-					 System.out.println("cette pizza n'existe pas");
-				 }
+				Pizza tempPizza = new Pizza(modifCode,modifLabel,modifPrix);
+				pizzaMemDao.updatePizza(codeModif,tempPizza);
 				 
 				break;
 			case 4 :
 				System.out.println("Suppression d’une pizza");
 				System.out.println("Liste des pizzas");
-				for(int i=0;i<menu.length;i++){
-					System.out.println(menu[i].code + "->" + menu[i].libelle +"(" + menu[i].prix +")");
+				
+				for(int i=0;i < pizzasTemp.length;i++){
+					System.out.print(pizzasTemp[i].code + "->");
+					System.out.print(pizzasTemp[i].libelle + "(");
+					System.out.println( pizzasTemp[i].prix + ")");
 				}
 				System.out.println("choisissez la pizza a supprimer");
 				
 				String codeSuppr = questionUser.next();
-				int supprId = -1;
-				for(int i=0;i<menu.length;i++){
-					if(menu[i].code.equals(codeSuppr) ){
-						supprId = i;
-					}
-				}
-				if (supprId == -1){
-					 System.out.println("cette pizza n'existe pas");
-				 }
-				else{
-					Pizza[] tempMenuSuppr = new Pizza[menu.length-1]; 
-					for(int i=0;i<menu.length;i++){
-						if (supprId>i){
-							tempMenuSuppr[i] = menu[i];
-						}
-						else if(supprId<i){
-							tempMenuSuppr[i-1] = menu[i];
-						}
-					}
-						menu = tempMenuSuppr;
-				}
+				
+				pizzaMemDao.deletePizza(codeSuppr);
 				
 				break;
 			case 99 :
