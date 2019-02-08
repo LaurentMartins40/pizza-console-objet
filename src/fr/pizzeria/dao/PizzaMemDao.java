@@ -15,7 +15,7 @@ public class PizzaMemDao implements PizzaDao{
 		String[] tableauPizzaLabel = {"Peperoni","Margherita", "La Reine","La 4 Fromage","La Cannibale","La Savoyarde","L'orientale","L'indienne"};
 		Double[] tableauPizzaPrix = {12.50,14.00,11.50,12.00,12.50,13.00,13.50,14.00};
 		
-		for(int i = 0 ; i < menu.size() ; i++){
+		for(int i = 0 ; i < tableauPizzaCode.length ; i++){
 			menu.add(new Pizza(i+1,tableauPizzaCode[i],tableauPizzaLabel[i],tableauPizzaPrix[i]));
 		}
 		
@@ -37,7 +37,6 @@ public class PizzaMemDao implements PizzaDao{
 				menu.get(i).setPizza(pizza.id,pizza.code,pizza.libelle,pizza.prix);
 			}
 		}
-	
 	}
 
 	@Override
@@ -48,15 +47,9 @@ public class PizzaMemDao implements PizzaDao{
 				supprId = i;
 			}
 		}
-		if (!pizzaExists(codePizza)){
-			 System.out.println("cette pizza n'existe pas");
-		 }
-		else{
-			
-				menu.remove(supprId) ;
-		}
-		
+			menu.remove(supprId) ;
 	}
+	
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
 		int idPizza = -1;

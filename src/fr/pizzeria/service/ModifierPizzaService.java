@@ -9,9 +9,15 @@ public class ModifierPizzaService extends MenuService{
 
 	@Override
 	public void executeUC(PizzaDao pizzaDao, Scanner scanner) {
-		System.out.println("Mise à jour d’une pizza");
-		System.out.println("quelle pizza modifier");
-		String codeModif = scanner.next();
+		String codeModif = "";
+		do{
+			System.out.println("Mise à jour d’une pizza");
+			System.out.println("quelle pizza modifier");
+			codeModif = scanner.next();
+			if(!pizzaDao.pizzaExists(codeModif)){
+				System.out.println("la pizza n'existe pas");
+			}
+		}while(!pizzaDao.pizzaExists(codeModif));
 		
 		
 		System.out.println("saissisez le nouveau code");

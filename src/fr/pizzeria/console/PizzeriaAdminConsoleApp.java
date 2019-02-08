@@ -15,7 +15,7 @@ public class PizzeriaAdminConsoleApp {
 			
 		while(!quit){ // la boucle se répetera jusqu'a ce que la variable "quit" change d'etat
 			
-			// affichage du menu
+			// affichage du menu utilisateur
 			System.out.println("1 : Lister les pizzas");
 			System.out.println("2 : Ajouter une nouvelle pizza");
 			System.out.println("3 : Mettre à jour une pizza");

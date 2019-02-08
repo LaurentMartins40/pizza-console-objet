@@ -1,5 +1,6 @@
 package fr.pizzeria.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
@@ -12,18 +13,20 @@ public class SupprimerPizzaService extends MenuService{
 		System.out.println("Suppression d’une pizza");
 		System.out.println("Liste des pizzas");
 		
-		Pizza[] pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		
-		for(int i=0;i < pizzas.length;i++){
-			System.out.print(pizzas[i].pizzaInfo());
+		for(int i=0;i < pizzas.size();i++){
+			System.out.println(pizzas.get(i).pizzaInfo());
 		}
-		System.out.println("choisissez la pizza a supprimer");
-		
-		String codeSuppr = scanner.next();
-		
+		String codeSuppr="";
+		do{
+			System.out.println("choisissez la pizza a supprimer");
+			codeSuppr = scanner.next();
+			if(!pizzaDao.pizzaExists(codeSuppr)){
+				System.out.println("la pizza n'existe pas");
+			}
+		}while(!pizzaDao.pizzaExists(codeSuppr));
 		pizzaDao.deletePizza(codeSuppr);
-		
-		
 	}
 
 }
