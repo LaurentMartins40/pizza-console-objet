@@ -5,9 +5,17 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.model.Pizza;
-
+/**
+ * Classe des fonctions du menu supression des pizzas qui implémente Menuservice
+ * @author Diginamic
+ *
+ */
 public class SupprimerPizzaService extends MenuService{
-
+	/**
+	 * Fonction du menu supression des pizzas
+	 * @param pizzaDao type PizzaDao
+	 * @param scanner type Scanner
+	 */
 	@Override
 	public void executeUC(PizzaDao pizzaDao, Scanner scanner) {
 		System.out.println("Suppression d’une pizza");

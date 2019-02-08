@@ -4,9 +4,17 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.model.Pizza;
-
+/**
+ * Classe des fonctions du menu ajout des pizzas qui implémente Menuservice
+ * @author Diginamic
+ *
+ */
 public class AjouterPizzaService extends MenuService{
-
+	/**
+	 * Fonction du menu ajout des pizzas
+	 * @param pizzaDao type PizzaDao
+	 * @param scanner type Scanner
+	 */
 	@Override
 	public void executeUC(PizzaDao pizzaDao, Scanner scanner) {
 		System.out.println("Ajout d’une nouvelle pizza");

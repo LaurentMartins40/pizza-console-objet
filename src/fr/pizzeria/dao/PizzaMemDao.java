@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.pizzeria.model.Pizza;
-
+/**
+ * sous classe de la super classe PizzaDao
+ * @author Diginamic
+ *
+ */
 public class PizzaMemDao implements PizzaDao{
 	
 		private List<Pizza> menu = new ArrayList<Pizza>();
-		
+		/**
+		 * constructeur d'initialisation des premieres pizzas
+		 */
 	public PizzaMemDao() {
 		
 		String[] tableauPizzaCode = {"PEP","MAR", "REIN","FRO","CAN","SAV","ORI","IND"};
@@ -20,16 +26,27 @@ public class PizzaMemDao implements PizzaDao{
 		}
 		
 	}
+	/**
+	 * fonction de recherche de toutes les pizzas
+	 * @return menu de type List<Pizza>
+	 */
 	@Override
 	public List<Pizza> findAllPizzas() {	
 		return menu;
 	}
-
+	/**
+	 * Fonction d'enregistrement d'une nouvelle pizza
+	 * @param pizza de type Pizza
+	 */
 	@Override
 	public void saveNewPizza(Pizza pizza) {
 		menu.add(pizza);
 	}
-
+	/**
+	 * Fonction de modification de pizza
+	 * @param codePizza de String
+	 * @param pizza de type Pizza
+	 */
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
 		for(int i=0;i<menu.size();i++){
@@ -38,7 +55,10 @@ public class PizzaMemDao implements PizzaDao{
 			}
 		}
 	}
-
+	/**
+	 * Fonction de supression d'une pizza
+	 * @param codePizza de type String
+	 */
 	@Override
 	public void deletePizza(String codePizza) {
 		int supprId = -1;
@@ -49,7 +69,11 @@ public class PizzaMemDao implements PizzaDao{
 		}
 			menu.remove(supprId) ;
 	}
-	
+	/**
+	 * fonction permettant de retrouver une pizza par sun code
+	 * @param codePizza de type String
+	 * @return pizza de type Pizza
+	 */
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
 		int idPizza = -1;
@@ -63,7 +87,11 @@ public class PizzaMemDao implements PizzaDao{
 		}
 		return null;	
 	}
-
+	/**
+	 * fonction permettant de vérifier si une pizza existe
+	 * @param codePizza de type String
+	 * @return Boolean
+	 */
 	@Override
 	public boolean pizzaExists(String codePizza) {
 		for(int i=0;i<menu.size();i++){
