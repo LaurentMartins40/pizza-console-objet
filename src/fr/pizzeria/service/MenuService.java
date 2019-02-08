@@ -3,6 +3,8 @@ package fr.pizzeria.service;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 /**
  * Superclasse abstraite qui initialise les différentes fonctions proposés dans le menu
  * @author Diginamic
@@ -14,5 +16,5 @@ public abstract class MenuService {
 	 * @param pizzaDao type PizzaDao
 	 * @param scanner type Scanner
 	 */
-	public abstract void executeUC(PizzaDao pizzaDao, Scanner scanner);
+	public abstract void executeUC(PizzaDao pizzaDao, Scanner scanner)throws StockageException;
 }

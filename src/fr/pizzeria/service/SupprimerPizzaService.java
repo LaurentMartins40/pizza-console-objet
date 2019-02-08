@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
+import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 /**
  * Classe des fonctions du menu supression des pizzas qui implémente Menuservice
@@ -17,7 +18,7 @@ public class SupprimerPizzaService extends MenuService{
 	 * @param scanner type Scanner
 	 */
 	@Override
-	public void executeUC(PizzaDao pizzaDao, Scanner scanner) {
+	public void executeUC(PizzaDao pizzaDao, Scanner scanner) throws DeletePizzaException{
 		System.out.println("Suppression d’une pizza");
 		System.out.println("Liste des pizzas");
 		
@@ -31,7 +32,7 @@ public class SupprimerPizzaService extends MenuService{
 			System.out.println("choisissez la pizza a supprimer");
 			codeSuppr = scanner.next();
 			if(!pizzaDao.pizzaExists(codeSuppr)){
-				System.out.println("la pizza n'existe pas");
+				throw new DeletePizzaException("la pizza n'existe pas");
 			}
 		}while(!pizzaDao.pizzaExists(codeSuppr));
 		pizzaDao.deletePizza(codeSuppr);

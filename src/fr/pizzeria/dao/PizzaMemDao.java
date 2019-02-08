@@ -3,6 +3,9 @@ package fr.pizzeria.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 /**
  * sous classe de la super classe PizzaDao
@@ -39,8 +42,9 @@ public class PizzaMemDao implements PizzaDao{
 	 * @param pizza de type Pizza
 	 */
 	@Override
-	public void saveNewPizza(Pizza pizza) {
-		menu.add(pizza);
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException{
+	
+			menu.add(pizza);
 	}
 	/**
 	 * Fonction de modification de pizza
@@ -48,7 +52,7 @@ public class PizzaMemDao implements PizzaDao{
 	 * @param pizza de type Pizza
 	 */
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String codePizza, Pizza pizza)throws UpdatePizzaException {
 		for(int i=0;i<menu.size();i++){
 			if(menu.get(i).code.equals(codePizza)){
 				menu.get(i).setPizza(pizza.id,pizza.code,pizza.libelle,pizza.prix);
@@ -60,7 +64,7 @@ public class PizzaMemDao implements PizzaDao{
 	 * @param codePizza de type String
 	 */
 	@Override
-	public void deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException{
 		int supprId = -1;
 		for(int i=0;i<menu.size();i++){
 			if(menu.get(i).code.equals(codePizza) ){

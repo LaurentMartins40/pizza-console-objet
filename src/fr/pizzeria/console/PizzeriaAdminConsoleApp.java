@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
 
@@ -22,13 +23,18 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("4 : Supprimer une pizza");
 			System.out.println("99 : Sortir");
 			// lecture du choix de l'utilisateur
+			
 			int choix = questionUser.nextInt();
 			if (choix != 99){
 			
 				// exécution de menuService dans MenuServiceFactory
 				MenuService menuService = MenuServiceFactory.getService(choix);
-				
-				menuService.executeUC(pizzaDao, questionUser);
+				try{
+					menuService.executeUC(pizzaDao, questionUser);	
+				}
+				catch(StockageException stockageException){
+					stockageException.getMessage();
+				}
 			}
 			else{
 				//Fin du programme
