@@ -7,6 +7,9 @@ public final class  Pizza {
 	public String code ;
 	public String libelle;
 	public double prix ;
+	
+	private CategoriePizza categorie;
+	
 	 /**
 	  * constructeur de la classe pizza
 	  */
@@ -15,6 +18,7 @@ public final class  Pizza {
 		this.code = "code";
 		this.libelle = "libelle";
 		this.prix = 0;
+		this.categorie = null;
 	 }
 	 /**
 	  * constructeur de la classe pizza
@@ -22,10 +26,12 @@ public final class  Pizza {
 	  * @param libelle
 	  * @param prix
 	  */
-	public Pizza( String code , String libelle, double prix){
+	public Pizza( String code , String libelle, double prix , CategoriePizza categorie){
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.categorie = categorie;
+		
 	}
 	/**
 	 * constructeur de la classe pizza
@@ -34,18 +40,20 @@ public final class  Pizza {
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(int id, String code , String libelle, double prix){
+	public Pizza(int id, String code , String libelle, double prix, CategoriePizza categorie){
 		this.id = id ;
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.categorie = categorie;
+
 	}
 	/**
 	 * fonction de mise en place d'un message
 	 * @return pizzaInfo type String
 	 */
 	public String pizzaInfo(){
-		return (this.code + "->" + this.libelle +"("+ this.prix+"€)");
+		return (this.code + "->" + this.libelle +"("+ this.prix+"€) de categorie : " + this.categorie);
 	}
 	/**
 	 * 
@@ -54,10 +62,15 @@ public final class  Pizza {
 	 * @param libelle type String
 	 * @param prix type double 
 	 */
-	public void setPizza(int id, String code , String libelle, double prix){
+	public void setPizza(int id, String code , String libelle, double prix, CategoriePizza categorie){
 		this.id = id ;
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.categorie = categorie;
 	}
+	public CategoriePizza getCategorie(){
+		return this.categorie;
+	}
+	
 }

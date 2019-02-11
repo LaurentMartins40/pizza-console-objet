@@ -6,6 +6,7 @@ import java.util.List;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 /**
  * sous classe de la super classe PizzaDao
@@ -23,9 +24,11 @@ public class PizzaMemDao implements PizzaDao{
 		String[] tableauPizzaCode = {"PEP","MAR", "REIN","FRO","CAN","SAV","ORI","IND"};
 		String[] tableauPizzaLabel = {"Peperoni","Margherita", "La Reine","La 4 Fromage","La Cannibale","La Savoyarde","L'orientale","L'indienne"};
 		Double[] tableauPizzaPrix = {12.50,14.00,11.50,12.00,12.50,13.00,13.50,14.00};
-		
+		CategoriePizza[] tableauPizzacat = {CategoriePizza.VIANDE,CategoriePizza.SANS_VIANDE,CategoriePizza.VIANDE,
+											CategoriePizza.SANS_VIANDE,CategoriePizza.VIANDE,CategoriePizza.SANS_VIANDE,
+											CategoriePizza.POISSON,CategoriePizza.POISSON};
 		for(int i = 0 ; i < tableauPizzaCode.length ; i++){
-			menu.add(new Pizza(i+1,tableauPizzaCode[i],tableauPizzaLabel[i],tableauPizzaPrix[i]));
+			menu.add(new Pizza(i+1,tableauPizzaCode[i],tableauPizzaLabel[i],tableauPizzaPrix[i],tableauPizzacat[i]));
 		}
 		
 	}
@@ -55,7 +58,7 @@ public class PizzaMemDao implements PizzaDao{
 	public void updatePizza(String codePizza, Pizza pizza)throws UpdatePizzaException {
 		for(int i=0;i<menu.size();i++){
 			if(menu.get(i).code.equals(codePizza)){
-				menu.get(i).setPizza(pizza.id,pizza.code,pizza.libelle,pizza.prix);
+				menu.get(i).setPizza(pizza.id,pizza.code,pizza.libelle,pizza.prix,pizza.getCategorie());
 			}
 		}
 	}
