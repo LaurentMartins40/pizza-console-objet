@@ -38,7 +38,7 @@ public class AjouterPizzaService extends MenuService{
 			System.out.println("saissisez la categorie");
 			System.out.println("1 : VIANDE");
 			System.out.println("2 : POISSON");
-			System.out.println("1 : SANS_VIANDE");
+			System.out.println("3 : SANS_VIANDE");
 			int categorieNouvelle = scanner.nextInt();
 			CategoriePizza nouvelleCategorie =  CategoriePizza.chooseCategoriePizza(categorieNouvelle);
 			Pizza nouvellePizza = new Pizza(codeNouveau,labelNouveau,prixNouveau, nouvelleCategorie);

@@ -31,7 +31,6 @@ public class ModifierPizzaService extends MenuService{
 			}
 		}while(!pizzaDao.pizzaExists(codeModif));
 		
-		
 		System.out.println("saissisez le nouveau code");
 		String modifCode = scanner.next();
 		System.out.println("saissisez le nouveau nom(sans espace)");
@@ -41,7 +40,7 @@ public class ModifierPizzaService extends MenuService{
 		System.out.println("saissisez la categorie");
 		System.out.println("1 : VIANDE");
 		System.out.println("2 : POISSON");
-		System.out.println("1 : SANS_VIANDE");
+		System.out.println("3 : SANS_VIANDE");
 		int categorieNouvelle = scanner.nextInt();
 		CategoriePizza modifCat =  CategoriePizza.chooseCategoriePizza(categorieNouvelle);
 		
@@ -49,7 +48,6 @@ public class ModifierPizzaService extends MenuService{
 		
 		pizzaDao.updatePizza(codeModif,tempPizza);
 		 
-		
 	}
 
 }

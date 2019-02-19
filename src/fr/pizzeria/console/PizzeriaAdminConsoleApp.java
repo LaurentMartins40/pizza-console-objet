@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.dao.PizzaMemDaoDB;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
@@ -12,7 +13,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String args[]) {
 		boolean quit = false;// initialisation de la variable "quit" a 0
 		Scanner questionUser = new Scanner(System.in ) ; // activation de la lecture
-		PizzaDao pizzaDao = new PizzaMemDao();
+		PizzaDao pizzaDao = new PizzaMemDaoDB();
 			
 		while(!quit){ // la boucle se répetera jusqu'a ce que la variable "quit" change d'etat
 			
